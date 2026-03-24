@@ -200,9 +200,7 @@ lutron.lutronEvent.on('led-status', (led, status) => {
 lutron.lutronEvent.on('button-status', (button, status) => {
     logging.info('button-status: ' + button + '   status: ' + status)
     const deviceTopic = mqtt_helpers.generateTopic('development', topic_prefix, 'button', button.toString())
-	// Delete this line to use the standard QoS/retention when this handler has been properly fleshed out
-	mqttOptions = { qos: 0, retain: false }
-    client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), status, mqttOptions)
+    client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), status, { qos: 0, retain: false })
 })
 
 // Discussions online indicate that you should be able to subscribe to /shade-status so including a proto handler so we can at least see if it is doing something.
@@ -213,9 +211,7 @@ lutron.lutronEvent.on('shade-status', (update) => {
     logging.info('shade-status: ' + JSON.stringify(update))
     const device = update.device
     const deviceTopic = mqtt_helpers.generateTopic('development', topic_prefix, 'shade', device.toString())
-	// Delete this line to use the standard QoS/retention when this handler has been properly fleshed out
-	mqttOptions = { qos: 0, retain: false }
-	client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), JSON.stringify(update), mqttOptions)
+    client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), JSON.stringify(update), { qos: 0, retain: false })
 })
 
 // Discussions online indicate that you should be able to subscribe to /device-status so including a proto handler so we can at least see if it is doing something.
@@ -226,9 +222,7 @@ lutron.lutronEvent.on('device-status', (update) => {
     logging.info('device-status: ' + JSON.stringify(update))
     const device = update.device
     const deviceTopic = mqtt_helpers.generateTopic('development', topic_prefix, 'device', device.toString())
-	// Delete this line to use the standard QoS/retention when this handler has been properly fleshed out
-	mqttOptions = { qos: 0, retain: false }
-	client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), JSON.stringify(update), mqttOptions)
+    client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), JSON.stringify(update), { qos: 0, retain: false })
 })
 
 // Discussions online indicate that you should be able to subscribe to /scene-status so including a proto handler so we can at least see if it is doing something.
@@ -239,9 +233,7 @@ lutron.lutronEvent.on('scene-status', (update) => {
     logging.info('scene-status: ' + JSON.stringify(update))
     const device = update.device
     const deviceTopic = mqtt_helpers.generateTopic('development', topic_prefix, 'scene', device.toString())
-	// Delete this line to use the standard QoS/retention when this handler has been properly fleshed out
-	mqttOptions = { qos: 0, retain: false }
-	client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), JSON.stringify(update), mqttOptions)
+    client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), JSON.stringify(update), { qos: 0, retain: false })
 })
 
 // Discussions online indicate that you should be able to subscribe to /sensor-status so including a proto handler so we can at least see if it is doing something.
@@ -252,9 +244,7 @@ lutron.lutronEvent.on('sensor-status', (update) => {
     logging.info('sensor-status: ' + JSON.stringify(update))
     const device = update.device
     const deviceTopic = mqtt_helpers.generateTopic('development', topic_prefix, 'sensor', device.toString())
-	// Delete this line to use the standard QoS/retention when this handler has been properly fleshed out
-	mqttOptions = { qos: 0, retain: false }
-	client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), JSON.stringify(update), mqttOptions)
+    client.smartPublish(mqtt_helpers.generateTopic(deviceTopic), JSON.stringify(update), { qos: 0, retain: false })
 })
 
 lutron.lutronEvent.on('unsolicited', (update) => {
