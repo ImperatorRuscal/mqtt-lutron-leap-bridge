@@ -1,6 +1,5 @@
 import pkg from '@terafin2/lutron-leap'
 const { Device, LeapClient, OneDeviceStatus, Response, SmartBridge } = pkg
-import { EventEmitter } from 'events'
 
 import events from 'events'
 import logging from 'homeautomation-js-lib/logging.js'
@@ -137,7 +136,7 @@ export class LutronLeap {
     async ping() {
         var success = true
         try {
-            this.sendCommand('ReadRequest', '/server/1/status/ping')
+            await this.sendCommand('ReadRequest', '/server/1/status/ping')
         } catch (error) {
             logging.error('ping failed: ' + error)
             connected = false
@@ -181,7 +180,7 @@ export class LutronLeap {
             })
 
             leap.on('unsolicited', (response) => {
-                emitter.emit('unsolicited: ' + JSON.stringify(response))
+                emitter.emit('unsolicited', response)
             })
 
             leap.on('disconnected', () => {
